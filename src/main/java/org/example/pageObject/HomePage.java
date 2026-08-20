@@ -11,6 +11,7 @@ public class HomePage {
 
     private final WebDriver driver;
     public HomePage(WebDriver driver) {
+
         this.driver = driver;
     }
 
@@ -36,17 +37,10 @@ public class HomePage {
             By.id("accordion__heading-7")
     };
 
-    //Ответы на вопросы о важном: поля 1-8
-    private static final By[] ANSWERS = {
-            By.id("accordion__panel-0"),
-            By.id("accordion__panel-1"),
-            By.id("accordion__panel-2"),
-            By.id("accordion__panel-3"),
-            By.id("accordion__panel-4"),
-            By.id("accordion__panel-5"),
-            By.id("accordion__panel-6"),
-            By.id("accordion__panel-7")
-    };
+    //Локатор "Вопросы о важном:"
+    private By question(String questionText) {
+        return By.xpath("//div[text()='" + questionText + "']");
+    }
 
     //открыть сайт бронирования самокатов
     public HomePage openSite() {
@@ -80,16 +74,19 @@ public class HomePage {
     }
 
     //Нажатие на вопрос их списка
-    public void clickQuestionArrow(int questionNumber) {
+    public void clickQuestionArrow(String questionText) {
         new WebDriverWait(driver, 15)
-                .until(ExpectedConditions.elementToBeClickable(QUESTIONS[questionNumber])).click();
+                .until(ExpectedConditions.elementToBeClickable(question(questionText))).click();
     }
 
     // Вывод текста при раскрытие вопроса
-    public String getAnswerText(int answerNumber) {
-        new WebDriverWait(driver, 15)
-                .until(ExpectedConditions.visibilityOfElementLocated(ANSWERS[answerNumber]));
+    public String getAnswerText(String questionText) {
+        WebElement questionElement = driver.findElement(question(questionText));
 
-        return driver.findElement(ANSWERS[answerNumber]).getText();
+        String answerId = questionElement.getAttribute("aria-controls");
+
+        return new WebDriverWait(driver, 15)
+                .until(ExpectedConditions.visibilityOfElementLocated(By.id(answerId)))
+                .getText();
     }
 }

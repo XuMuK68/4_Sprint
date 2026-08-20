@@ -1,12 +1,14 @@
-import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 public abstract class BaseTest {
     protected WebDriver driver;
+    protected WebDriverWait wait;
 
     @Before
     public void setUp() {
@@ -14,7 +16,7 @@ public abstract class BaseTest {
         driver = new ChromeDriver();
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver, 5);
     }
 
     @After

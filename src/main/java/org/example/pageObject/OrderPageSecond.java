@@ -35,7 +35,7 @@ public class OrderPageSecond {
     private final By orderButtonYes = By.xpath(".//button[text()='Да']");
 
     // Локатор модального окна подтверждения аренды
-    private final By modalOrderWindow = By.xpath(".//div[contains(@class, 'Order_ModalHeader')]");
+    private final By modalOrderWindow = By.xpath(".//div[contains(@class, 'Order_ModalHeader__3FDaJ')]");
 
     // Модальное окно "Заказ оформлен"
     public boolean isModalOrderWindowDisplayed() {
