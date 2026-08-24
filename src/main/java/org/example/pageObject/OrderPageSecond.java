@@ -4,6 +4,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class OrderPageSecond {
     private final WebDriver driver;
@@ -35,11 +37,13 @@ public class OrderPageSecond {
     private final By orderButtonYes = By.xpath(".//button[text()='Да']");
 
     // Локатор модального окна подтверждения аренды
-    private final By modalOrderWindow = By.xpath(".//div[contains(@class, 'Order_ModalHeader__3FDaJ')]");
+    private final By modalOrderWindow = By.xpath("//div[contains(@class,'Order_ModalHeader') and contains(text(),'Заказ оформлен')]");
 
     // Модальное окно "Заказ оформлен"
     public boolean isModalOrderWindowDisplayed() {
-        return driver.findElement(modalOrderWindow).isDisplayed();
+        return new WebDriverWait(driver, 10)
+                .until(ExpectedConditions.visibilityOfElementLocated(modalOrderWindow))
+                .isDisplayed();
     }
 
     // Передаём WebDriver

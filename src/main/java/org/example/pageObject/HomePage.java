@@ -25,18 +25,6 @@ public class HomePage {
     //Кнопка "Заказать" внизу сайта
     private static final By orderDownButton = By.className("Button_Middle__1CSJM");
 
-    //Вопросы о важном: кнопки 1-8
-    private static final By[] QUESTIONS = {
-            By.id("accordion__heading-0"),
-            By.id("accordion__heading-1"),
-            By.id("accordion__heading-2"),
-            By.id("accordion__heading-3"),
-            By.id("accordion__heading-4"),
-            By.id("accordion__heading-5"),
-            By.id("accordion__heading-6"),
-            By.id("accordion__heading-7")
-    };
-
     //Локатор "Вопросы о важном:"
     private By question(String questionText) {
         return By.xpath("//div[text()='" + questionText + "']");
@@ -68,7 +56,7 @@ public class HomePage {
 
     //прокрутка до последнего вопроса
     public HomePage scrollToLastQuestion() {
-        WebElement lastQuestion = driver.findElement(QUESTIONS[QUESTIONS.length - 1]);
+        WebElement lastQuestion = driver.findElement(By.id("accordion__heading-7"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", lastQuestion);
         return this;
     }

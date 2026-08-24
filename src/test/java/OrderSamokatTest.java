@@ -43,12 +43,35 @@ public class OrderSamokatTest extends BaseTest {
         this.comment = comment;
     }
 
-     @Parameterized.Parameters
-    public static Object[][] getData() {
-        return OrderSamokatTestData.getOrderData();
+     // Делаем по 1 заказу с каждой кнопки с разными данными
+    @Parameterized.Parameters(name = "Кнопка: {0}, Пользователь: {1} {2}")
+    public static Object[][] getOrderData() {
+        return new Object[][]{
+                {
+                        "UP",
+                        "Александр",
+                        "Гаврилов",
+                        "Москва, ул. Ярцевская, 27А",
+                        "88005553535",
+                        "Молодежная",
+                        "25.08.2026",
+                        true,
+                        "Привезите с полным зарядом"
+                },
+                {
+                        "DOWN",
+                        "Май",
+                        "Абрикосов",
+                        "Москва, Проспект Мира, 119",
+                        "88004567889",
+                        "ВДНХ",
+                        "11.09.2026",
+                        false,
+                        "Купите по пути бигтейсти"
+                }
+        };
     }
 
-    // Делаем по 2 заказа с каждой кнопки с 2-мя разными данными
     @Test
     public void orderingSamokatTest() {
 

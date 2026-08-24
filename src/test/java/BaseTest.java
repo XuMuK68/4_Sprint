@@ -3,6 +3,8 @@ import org.junit.Before;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -17,6 +19,11 @@ public abstract class BaseTest {
 
         driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 5);
+
+        //FirefoxOptions options = new FirefoxOptions();
+        //options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
+        //WebDriverManager.firefoxdriver().setup();
+        //driver = new FirefoxDriver(options);
     }
 
     @After
